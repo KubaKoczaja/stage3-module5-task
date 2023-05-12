@@ -1,0 +1,12 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation project(':module-web')
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+}
+
+run {
+    standardInput = System.in
+}
