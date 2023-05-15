@@ -73,7 +73,7 @@ public class NewsController implements BaseRestController<NewsRequestDto, NewsMo
 		@PutMapping("/update/{id}")
 		@ApiOperation(value = "Update news information", response = NewsModelDto.class)
 		@ApiResponses(value = {
-						@ApiResponse(code = 200, message = "Successfully updated news information"),
+						@ApiResponse(code = 202, message = "Successfully updated news information"),
 						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -84,12 +84,26 @@ public class NewsController implements BaseRestController<NewsRequestDto, NewsMo
 				return new ResponseEntity<>(newsService.update(updateRequest), HttpStatus.ACCEPTED);
 		}
 
+		@PatchMapping("/patch/{id}")
+		@ApiOperation(value = "Patch news information", response = NewsModelDto.class)
+		@ApiResponses(value = {
+						@ApiResponse(code = 200, message = "Successfully patched news information"),
+						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+						@ApiResponse(code = 500, message = "Application failed to process the request")
+		})
+		public ResponseEntity<NewsModelDto> patch(@PathVariable Long id, @Valid @RequestBody NewsRequestDto patchRequest) {
+				patchRequest.setId(id);
+				return new ResponseEntity<>(newsService.update(patchRequest), HttpStatus.ACCEPTED);
+		}
+
 		@Override
 		@DeleteMapping("/delete/{id}")
 		@ResponseStatus(HttpStatus.NO_CONTENT)
 		@ApiOperation(value = "Deletes specific news with the supplied id")
 		@ApiResponses(value = {
-						@ApiResponse(code = 200, message = "Successfully deletes the specific author"),
+						@ApiResponse(code = 204, message = "Successfully deletes the specific author"),
 						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),

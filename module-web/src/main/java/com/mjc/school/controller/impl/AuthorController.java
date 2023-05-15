@@ -73,7 +73,7 @@ public class AuthorController implements BaseRestController<AuthorRequestDto, Au
 		@PutMapping("/update/{id}")
 		@ApiOperation(value = "Update author's information", response = AuthorModelDto.class)
 		@ApiResponses(value = {
-						@ApiResponse(code = 200, message = "Successfully updated author's information"),
+						@ApiResponse(code = 202, message = "Successfully updated author's information"),
 						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -83,12 +83,25 @@ public class AuthorController implements BaseRestController<AuthorRequestDto, Au
 				updateRequest.setId(id);
 				return new ResponseEntity<>(authorService.update(updateRequest), HttpStatus.ACCEPTED);
 		}
+		@PatchMapping("/patch/{id}")
+		@ApiOperation(value = "Patch author's information", response = AuthorModelDto.class)
+		@ApiResponses(value = {
+						@ApiResponse(code = 200, message = "Successfully patched author's information"),
+						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+						@ApiResponse(code = 500, message = "Application failed to process the request")
+		})
+		public ResponseEntity<AuthorModelDto> patch(@PathVariable Long id, @Valid @RequestBody AuthorRequestDto patchRequest) {
+				patchRequest.setId(id);
+				return new ResponseEntity<>(authorService.update(patchRequest), HttpStatus.ACCEPTED);
+		}
 
 		@Override
 		@DeleteMapping("/delete/{id}")
 		@ApiOperation(value = "Deletes specific author with the supplied id")
 		@ApiResponses(value = {
-						@ApiResponse(code = 200, message = "Successfully deletes the specific author"),
+						@ApiResponse(code = 204, message = "Successfully deletes the specific author"),
 						@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 						@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 						@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
