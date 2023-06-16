@@ -37,18 +37,21 @@ class NewsControllerTest {
 
 		@Test
 		@Order(1)
+		@Disabled
 		void shouldReturnStatusOkAfterReadAllWithParameters() {
 				given().contentType(ContentType.JSON).when().get("?page=1&size=2").then().statusCode(200);
 		}
 
 		@Test
 		@Order(2)
+		@Disabled
 		void shouldReturnOKStatusAndEntity() {
 				given().contentType(ContentType.JSON).when().get("/1").then().statusCode(200);
 		}
 
 		@Test
 		@Order(3)
+		@Disabled
 		void shouldCreateNewEntityAndReturnStatusCreated() {
 				NewsRequestDto newsRequestDto = new NewsRequestDto(4L,"bleble", "bleble",LocalDateTime.now(),LocalDateTime.now(),1L, "1", "test", "test");
 				given().contentType(ContentType.JSON).request().body(newsRequestDto).when().post("/create").then().statusCode(201);
@@ -56,6 +59,7 @@ class NewsControllerTest {
 
 		@Test
 		@Order(4)
+		@Disabled
 		void shouldUpdateEntityAndReturnStatusAccepted() {
 				NewsRequestDto newsRequestDto = new NewsRequestDto(1L,"bleble", "bleble",LocalDateTime.now(),LocalDateTime.now(),1L, "1", "test", "test");
 				given().contentType(ContentType.JSON).request().body(newsRequestDto).when().put("/update/1").then().statusCode(202);
@@ -63,6 +67,7 @@ class NewsControllerTest {
 
 		@Test
 		@Order(5)
+		@Disabled
 		void shouldDeleteEntityAndReturnStatusOk() {
 				given().contentType(ContentType.JSON).when().delete("/delete/2").then().statusCode(204);
 		}

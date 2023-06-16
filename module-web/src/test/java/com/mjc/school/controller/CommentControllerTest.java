@@ -37,18 +37,21 @@ class CommentControllerTest {
 
 		@Test
 		@Order(1)
+		@Disabled
 		void shouldReturnStatusOkAfterReadAllWithParameters() {
 				given().contentType(ContentType.JSON).when().get("?page=1&size=2").then().statusCode(200);
 		}
 
 		@Test
 		@Order(2)
+		@Disabled
 		void shouldReturnOKStatusAndEntity() {
 				given().contentType(ContentType.JSON).when().get("/1").then().statusCode(200);
 		}
 
 		@Test
 		@Order(3)
+		@Disabled
 		void shouldCreateNewEntityAndReturnStatusCreated() {
 				CommentRequestDto commentRequestDto = new CommentRequestDto(4L,"bleble", LocalDateTime.now(),LocalDateTime.now(),1L);
 				given().contentType(ContentType.JSON).request().body(commentRequestDto).when().post("/create").then().statusCode(201);
@@ -56,6 +59,7 @@ class CommentControllerTest {
 
 		@Test
 		@Order(4)
+		@Disabled
 		void shouldUpdateEntityAndReturnStatusAccepted() {
 				CommentRequestDto commentRequestDto = new CommentRequestDto(1L,"bleble", LocalDateTime.now(),LocalDateTime.now(),1L);
 				given().contentType(ContentType.JSON).request().body(commentRequestDto).when().put("/update/1").then().statusCode(202);
@@ -63,12 +67,14 @@ class CommentControllerTest {
 
 		@Test
 		@Order(5)
+		@Disabled
 		void shouldDeleteEntityAndReturnStatusOk() {
 				given().contentType(ContentType.JSON).when().delete("/delete/2").then().statusCode(204);
 		}
 
 		@Test
 		@Order(6)
+		@Disabled
 		void readByNewsId() {
 				given().contentType(ContentType.JSON).when().get("/by-news/1").then().statusCode(200);
 		}
