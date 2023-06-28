@@ -13,7 +13,7 @@ dockerCompose {
 }
 sonarqube {
     properties {
-        property 'sonar.host.url', 'http://localhost:9000'
+        property 'sonar.host.url', 'http://0.0.0.0:9000'
         property 'sonar.login', 'admin'
         property 'sonar.token', 'sqa_986eb8dfc6c45e522d4cc7e417c975fbd05bf44f'
         property 'sonar.password', 'password_admin'
