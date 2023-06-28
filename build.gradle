@@ -1,34 +1,41 @@
 plugins {
     id 'java-base'
     id "org.sonarqube" version "3.4.0.2513"
+    id 'com.avast.gradle.docker-compose' version '0.16.12'
 }
 wrapper {
     gradleVersion = gradlewVersion
 }
 
+dockerCompose {
+    useComposeFiles = ['docker-compose.yml']
+    waitForTcpPorts = false
+}
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://localhost:9000'
+        property 'sonar.login', 'admin'
+        property 'sonar.token', 'sqa_986eb8dfc6c45e522d4cc7e417c975fbd05bf44f'
+        property 'sonar.password', 'password_admin'
+        property 'sonar.projectKey', 'testtest'
+        property 'sonar.projectName', 'CI/CD task'
+        property 'sonar.java.source', 17
+        property 'sonar.junit.reportPaths', 'build/results'
+        property 'encoding', 'UTF-8'
+        property 'charSet', 'UTF-8'
+    }
+}
 subprojects {
     apply plugin: 'java'
     apply plugin: 'jacoco'
+    apply plugin: 'com.avast.gradle.docker-compose'
     group = 'com.mjc.school'
 
 
     repositories {
         mavenCentral()
     }
-    sonarqube {
-        properties {
-            property 'sonar.host.url', 'http://localhost:9000'
-            property "sonar.login", "admin"
-            property "sonar.token", "sqa_c2aac2367962d6c1965db18e749338bbb3sqa_c2aac2367962d6c1965db18e749338bbb35f985f98"
-            property "sonar.password", "password_admin"
-            property "sonar.projectKey", "test"
-            property 'sonar.projectName', 'test'
-            property 'sonar.java.source', 17
-            property 'sonar.junit.reportPaths', 'build/results'
-            property 'encoding', 'UTF-8'
-            property 'charSet', 'UTF-8'
-        }
-    }
+
 
     dependencies {
         implementation "org.springframework:spring-context:$springVersion"
