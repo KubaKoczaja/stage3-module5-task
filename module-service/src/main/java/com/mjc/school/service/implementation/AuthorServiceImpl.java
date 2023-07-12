@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class AuthorServiceImpl implements AuthorService {
 		private final AuthorMapper authorMapper;
 		@Override
 		public List<AuthorModelDto> readAll() {
-				return authorRepository.findAll().stream().map(authorMapper::authorToAuthorDto).toList();
+				return authorRepository.findAll().stream().map(authorMapper::authorToAuthorDto).collect(Collectors.toList());
 		}
 
 		@Override
@@ -34,7 +35,7 @@ public class AuthorServiceImpl implements AuthorService {
 								.getContent()
 								.stream()
 								.map(authorMapper::authorToAuthorDto)
-								.toList();
+								.collect(Collectors.toList());
 		}
 
 		@Override

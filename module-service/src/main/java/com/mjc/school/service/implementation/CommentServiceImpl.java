@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
 		private final NewsRepository newsRepository;
 		@Override
 		public List<CommentModelDto> readAll() {
-				return commentRepository.findAll().stream().map(commentMapper::commentToCommentDto).toList();
+				return commentRepository.findAll().stream().map(commentMapper::commentToCommentDto).collect(Collectors.toList());
 		}
 
 		@Override
@@ -36,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
 								.getContent()
 								.stream()
 								.map(commentMapper::commentToCommentDto)
-								.toList();
+								.collect(Collectors.toList());
 		}
 
 		@Override

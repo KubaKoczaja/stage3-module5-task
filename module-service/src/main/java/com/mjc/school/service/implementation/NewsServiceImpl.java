@@ -36,7 +36,7 @@ public class NewsServiceImpl implements NewsService {
 
 		@Override
 		public List<NewsModelDto> readAll() {
-				return newsRepository.findAll().stream().map(newsMapper::newsToNewsDTO).toList();
+				return newsRepository.findAll().stream().map(newsMapper::newsToNewsDTO).collect(Collectors.toList());
 		}
 		@Override
 		public List<NewsModelDto> readAllPagedAndSorted(int page, int size, String sortBy) {
@@ -47,7 +47,7 @@ public class NewsServiceImpl implements NewsService {
 								.getContent()
 								.stream()
 								.map(newsMapper::newsToNewsDTO)
-								.toList();
+								.collect(Collectors.toList());
 		}
 
 		@Override

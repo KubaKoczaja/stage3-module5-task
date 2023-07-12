@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class TagServiceImpl implements TagService {
 
 		@Override
 		public List<TagModelDto> readAll() {
-				return tagRepository.findAll().stream().map(tagMapper::tagToTagDTO).toList();
+				return tagRepository.findAll().stream().map(tagMapper::tagToTagDTO).collect(Collectors.toList());
 		}
 
 		@Override
@@ -34,7 +35,7 @@ public class TagServiceImpl implements TagService {
 								.getContent()
 								.stream()
 								.map(tagMapper::tagToTagDTO)
-								.toList();
+								.collect(Collectors.toList());
 		}
 		@Override
 		public TagModelDto readById(Long id) {
