@@ -30,6 +30,7 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'com.avast.gradle.docker-compose'
     group = 'com.mjc.school'
+    apply plugin: 'war'
 
 
     repositories {
