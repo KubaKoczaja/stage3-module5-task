@@ -67,6 +67,6 @@ public class TagServiceImpl implements TagService {
 
 		@Override
 		public List<TagModelDto> readByNewsId(Long newsId) {
-				return tagRepository.findAllByNewsModelId(newsId).stream().map(tagMapper::tagToTagDTO).toList();
+				return tagRepository.findAllByNewsModelId(newsId).stream().map(tagMapper::tagToTagDTO).collect(Collectors.toList());
 		}
 }

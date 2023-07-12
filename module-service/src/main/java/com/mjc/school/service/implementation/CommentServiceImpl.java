@@ -72,6 +72,6 @@ public class CommentServiceImpl implements CommentService {
 
 		@Override
 		public List<CommentModelDto> readByNewsId(Long newsId) {
-				return commentRepository.findAllByNewsModelId(newsId).stream().map(commentMapper::commentToCommentDto).toList();
+				return commentRepository.findAllByNewsModelId(newsId).stream().map(commentMapper::commentToCommentDto).collect(Collectors.toList());
 		}
 }
