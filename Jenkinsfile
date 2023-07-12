@@ -7,4 +7,6 @@ node {
       sh "./gradlew sonar"
     }
   }
+tools {
+    jdk 'jdk_17'
 }
