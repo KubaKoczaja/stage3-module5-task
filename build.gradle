@@ -2,6 +2,7 @@ plugins {
     id 'java-base'
     id "org.sonarqube" version "3.4.0.2513"
     id 'com.avast.gradle.docker-compose' version '0.16.12'
+    id 'war'
 }
 wrapper {
     gradleVersion = gradlewVersion
@@ -30,7 +31,7 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'com.avast.gradle.docker-compose'
     group = 'com.mjc.school'
-    apply plugin: 'war'
+//    apply plugin: 'war'
 
 
     repositories {
