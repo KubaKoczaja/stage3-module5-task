@@ -19,3 +19,8 @@ services:
       - ~/jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
+  tomcat:
+    image: tomcat:9
+    ports:
+      - 8090:8090
+    container_name: tomcat
