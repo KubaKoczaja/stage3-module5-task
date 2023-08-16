@@ -2,7 +2,6 @@ plugins {
     id 'java-base'
     id "org.sonarqube" version "3.4.0.2513"
     id 'com.avast.gradle.docker-compose' version '0.16.12'
-    id 'war'
 }
 wrapper {
     gradleVersion = gradlewVersion
@@ -26,19 +25,18 @@ sonarqube {
         property 'charSet', 'UTF-8'
     }
 }
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'jacoco'
     apply plugin: 'com.avast.gradle.docker-compose'
+    apply plugin: 'war'
     group = 'com.mjc.school'
-//    apply plugin: 'war'
 
 
     repositories {
         mavenCentral()
     }
-
-
 
     dependencies {
         implementation "org.springframework:spring-context:$springVersion"
